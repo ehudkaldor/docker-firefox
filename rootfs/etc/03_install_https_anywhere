@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv sh
+
+echo "installing HTTPS-eveywhere"
+PROFILE=$(grep "Path" /home/$PROFILE_NAME/.mozilla/firefox/profiles.ini | awk '{split($0,a,"="); print a[2]}')
+mkdir /installers/https/
+cd /installers/https/
+wget https://www.eff.org/files/https-everywhere-2019.1.31-eff.xpi
+cp https-everywhere-2019.1.31-eff.xpi /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/extensions/https-everywhere-2019.1.31-eff.xpi
+unzip -q https-everywhere-2019.1.31-eff.xpi
+ID=$(grep "\"id\"" manifest.json   | awk '{split($0,a,"\""); print a[4]}')
+# mkdir /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/extensions/\{$ID\}
+mv /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/extensions/https-everywhere-2019.1.31-eff.xpi /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/extensions/$ID.xpi

@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv sh
+
+PROFILE=$(grep "Path" /home/$PROFILE_NAME/.mozilla/firefox/profiles.ini | awk '{split($0,a,"="); print a[2]}')
+EXTENSIONS_PATH=/home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/extensions/
+for url in \
+        https://secure.informaction.com/download/releases/noscript-10.2.4.xpi \
+        https://www.eff.org/files/https-everywhere-2019.1.31-eff.xpi \
+        https://www.eff.org/files/privacy-badger-latest.xpi \
+        ; do
+  xpi=$(basename "$url")
+  echo "installing $xpi"
+  mkdir /installers/$xpi/
+  cd /installers/$xpi/
+  wget $url -O $xpi
+  su $PROFILE_NAME -c "cp $xpi $EXTENSIONS_PATH/$xpi"
+  unzip -q $xpi
+  ID=$(grep "\"id\"" manifest.json | awk '{split($0,a,"\""); print a[4]}')
+  su $PROFILE_NAME -c "mv $EXTENSIONS_PATH/$xpi $EXTENSIONS_PATH/$ID.xpi"
+done

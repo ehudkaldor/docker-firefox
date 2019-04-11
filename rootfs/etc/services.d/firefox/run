@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv sh
+
+su $PROFILE_NAME -c "/usr/bin/firefox -P \"$PROFILE_NAME\" $WEBSITE"
