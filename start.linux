@@ -13,4 +13,4 @@ docker run -d \
         -e GDK_DPI_SCALE \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v /etc/localtime:/etc/localtime:ro \
-	--name firefox-alpine ehudkaldor/firefox
+	--name docker-firefox ehudkaldor/firefox:latest

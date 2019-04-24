@@ -1,0 +1,2 @@
+xhost + 127.0.0.1
+docker run -d --rm -e DISPLAY=host.docker.internal:0 --shm-size 2g --name docker-firefox ehudkaldor/firefox:latest

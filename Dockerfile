@@ -13,7 +13,7 @@ FROM		ehudkaldor/alpine-s6
 
 MAINTAINER 	Ehud Kaldor <ehud@unfairfunction.org>
 
-ENV     WEBSITE www.google.com
+ENV     WEBSITE www.duckduckgo.com
 ENV     PROFILE_NAME firefox
 
 RUN   adduser -D $PROFILE_NAME && \
