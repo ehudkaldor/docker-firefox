@@ -5,6 +5,8 @@ echo "creating and  tweaking firefox profile"
 su $PROFILE_NAME -c "firefox -CreateProfile \"$PROFILE_NAME\""
 PROFILE=$(grep "Path" /home/$PROFILE_NAME/.mozilla/firefox/profiles.ini | awk '{split($0,a,"="); print a[2]}')
 echo "created profile $PROFILE"
+echo "user_pref(\"signon.rememberSignons\", false);" >> /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/prefs.js
+echo "user_pref(\"dom.webnotifications.enabled\", false);" >> /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/prefs.js
 echo "user_pref(\"browser.tabs.warnOnClose\", false);" >> /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/prefs.js
 echo "user_pref(\"browser.startup.homepage\", \"$WEBSITE\");" >> /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/prefs.js
 echo "user_pref(\"extensions.autoDisableScopes\", 0);" >> /home/$PROFILE_NAME/.mozilla/firefox/$PROFILE/prefs.js
